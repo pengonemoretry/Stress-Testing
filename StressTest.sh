@@ -25,9 +25,10 @@ systemctl restart firewalld.service
 # 检查并安装 stress 工具
 if ! command -v stress &> /dev/null; then
     echo "安装 stress 工具"
+    sudo yum install epel-release
     sudo yum install -y stress
 fi
 
 # 进行压力测试
 echo "开始压力测试"
-stress --vm 10 --vm-bytes 37G --vm-keep --hdd 4 --hdd-bytes 800G
+stress -c 128 --vm 10 --vm-bytes 37G --vm-keep --hdd 4 --hdd-bytes 800G
